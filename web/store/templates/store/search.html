@@ -1,0 +1,26 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+{% block main-content %}
+<h1 style= "text-align:center"> Sản phẩm </h1>
+
+<div class="row" style="width: 100%; margin-left:20px"> 
+
+  {% for prod in product %}
+  
+     <div  class="col-lg-3"> 
+   
+       <div style="width: 91.5% " class="box" >
+         <img  style="height: 300px"   class="thumbnail" src="{{prod.ImageURL}}">
+          <div class="box-element product">
+           <h6> {{ prod.spTen }} </h6>
+           <hr>
+           <a class="btn btn-outline-success" href="{% url 'product_detail' prod.lsp.dmsp.dmspDuongdan prod.lsp.lspDuongdan prod.spDuongdan %}">Xem</a>
+           <h5 style="display: inline-block; float: right;"> <strong> {{prod.formatted_price}}VND </strong> </h5>
+           </div>
+         </div> 
+       </div>
+       {% endfor %}
+ </div> 
+
+{% endblock main-content %}

@@ -1,0 +1,24 @@
+
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block main-content %}
+
+<h2 style="text-align:center; margin-top:10px;">{{ category.dmspTen }}</h2>
+
+<div class="row" style="width: 100%; margin:10px"> 
+    {% for product_type in product_types %}
+       <div   class="col-lg-3"> 
+           <img  style="height: 330px" class="thumbnail" src="{{product_type.ImageURL}}">
+            <div class="box-element product">
+             <h6 style="text-align:center"><a style="text-decoration: none;" href="{% url 'product_list' category.dmspDuongdan product_type.lspDuongdan %}"> {{ product_type.lspTen }}</a></h6>
+           </div> 
+         </div>
+
+   {% endfor %}
+   
+</div>
+
+{% endblock main-content %}
+
+

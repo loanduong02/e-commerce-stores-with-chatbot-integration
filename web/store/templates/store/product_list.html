@@ -1,0 +1,35 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block main-content %}
+
+<h3 style="text-align:center; margin-top:10px;" > {{ product_type.lspTen }}</h3>
+
+<div class="row" style="width: 100%; margin-left:20px"> 
+
+  {% for product in products %}
+  
+     <div  class="col-lg-3"> 
+   
+       <div style="width: 91.5% " class="box" >
+         <img  style="height: 300px"   class="thumbnail" src="{{product.ImageURL}}">
+          <div class="box-element product">
+           <h6> {{ product.spTen }} </h6>
+           <hr>
+           <a class="btn btn-outline-success" href="{% url 'product_detail' category.dmspDuongdan product_type.lspDuongdan product.spDuongdan %}"> Xem </a>
+           <h5 style="display: inline-block; float: right;"> <strong> {{product.formatted_price}}VND </strong> </h5>
+           </div>
+         </div> 
+       </div>
+       {% endfor %}
+       
+ </div>
+
+{% endblock main-content %}
+
+{% comment %} <h2> {{ product_type.lspTen }}</h2>
+<ul>
+    {% for product in products %}
+        <li>{{ product.spTen }}</li>
+    {% endfor %}
+</ul>  {% endcomment %}

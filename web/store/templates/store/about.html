@@ -1,0 +1,116 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+{% block main-content %}
+<style>
+    .bgcol{
+        background: grey;
+        height: 300px;
+      }
+      .testimg{
+        width:15%;
+        height:20%;
+        border-radius: 50%;
+      }
+      .card{
+        box-shadow:10px 10px 26px -15px rgba(0, 0, 0, 0.75)
+      }
+      .card-body{
+        height:350px;
+      }
+      
+</style>
+
+<section class="mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 p-5">
+        <h2>BEAUTY SHOP - MỸ PHẨM CHÍNH HÃNG, GIÁ RẺ NHẤT THỊ TRƯỜNG</h2>
+        <p class="main">
+            Đến Beauty Shop mua sắm, khách hàng không chỉ được trải nghiệm không gian hiện đại bật nhất mà còn tiếp
+            cận được rất nhiều được nhiều sản phẩm mới lạ đến từ các thương hiệu chăm sóc da, trang điểm từ
+            thương hiệu bình dân cho đến cao cấp. Trên quầy kệ tại cửa hàng, bạn sẽ dễ dàng tìm thấy các thương
+            hiệu nổi tiếng như: L'Oréal, Estee Lauder, Obagi, Murad, MartiDerm, Bioderma, Cetaphil, Anessa,
+            Timeless Skincare, Cosmedica Skincare,.... BEAUTY SHOP - Thiên đường mua sắm mỹ phẩm chính hãng
+            được sao Việt và hàng triệu tín đồ làm đẹp cả nước yêu thích!
+        </p>
+        {% comment %} <btn class="btn btn-large btn-dark">Contact</btn> {% endcomment %}
+    </div>
+
+    <div class="col-md-6">
+        <img class="thumbnail" src="{% static 'store/images/banner/banner1.jpg'%}">
+    </div>
+    
+    </div>
+  <div/>
+</section>
+<section class="p-0 p-md-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4> <b>  Dịch vụ của chúng tôi  </b> </h4>
+        <p>
+          Dịch vụ chăm sóc khách hàng tận tâm: 
+          Ngoài những ưu đãi được kể trên, khách hàng mua sắm tại cửa hàng sẽ được tư vấn soi da. Đối với khách hàng mua online, mỗi đơn hàng từ 100.000 sẽ được miễn phí giao hàng. 
+          Không gian mua sắm thoải mái, sang trọng 
+          Cửa hàng tấp nập khách ra vào, trung bình đón hơn 3000 lượt khách mỗi ngày trên toàn hệ thống. 
+          Quầy kệ được trưng bày hợp lý và bắt mắt giúp khách hàng dễ dàng tìm kiếm các sản phẩm mong muốn. 
+          Mỗi ngăn, mỗi tầng là một khu trưng bày hàng hóa riêng biệt, được phân chia dựa trên công dụng của từng loại như skincare, makeup, body care, chăm sóc tóc, nước hoa, thực phẩm chức năng… 
+          Nhân viên có kiến thức chuyên sâu 
+          Nhân viên được trau dồi kiến thức chuyên môn sẽ giúp khách hàng đưa ra những gợi ý & lời khuyên chân thành nhằm đáp ứng những yêu cầu mà khách hàng mong muốn
+        </p>
+         <br>
+
+        <img class="img-fluid d-none d-md-block"src="https://source.unsplash.com/1200x400/?team,people">
+       
+      </div>
+    </div>
+    
+  </div>
+</section>
+  <section class="p- p-md-5">
+  <div class="container">
+    <div class="d-md-flex justify-content-space-between">
+      <div class="flexitem p-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <img src="https://source.unsplash.com/400x400/?man,woman" class="testimg" alt="error">
+               <b>  GIAO HÀNG TOÀN QUỐC             </b>
+             </h5>
+            <hr>
+             <p class="card-text">"Hỗ trợ phí ship rẻ nhất cho các quận, tỉnh thành trên cả nước."</p>
+          </div>
+        </div>
+      </div>
+      <div class="flexitem p-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <img src="https://source.unsplash.com/400x400/?man,woman" class="testimg" alt="error">
+              <b>GIAO HÀNG NHANH </b>
+             </h5>
+            <hr>
+             <p class="card-text">"Giao hàng nhanh chóng trong nội thành HCM và Hà Nội"</p>
+          </div>
+        </div>
+      </div>
+      <div class="flexitem p-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <img src="https://source.unsplash.com/400x400/?man,woman" class="testimg" alt="error">
+              <b> THƯƠNG HIỆU UY TÍN TOÀN CẦU</b>
+             </h5>
+            <hr>
+             <p class="card-text">"   Đảm bảo tất cả sản phẩm được bán ra là 100% chính hãng và có giấy tờ, hoá đơn VAT đầy đủ."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+ 
+
+{% endblock main-content %}

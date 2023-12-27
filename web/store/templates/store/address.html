@@ -1,0 +1,45 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+{% block main-content %}
+{% csrf_token %}
+
+<div class="container my-5">
+    <div class="row">
+        <h4> Xin Chào <span class="text-capitalize"> {{request.user}}</span> </h4>
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"> <a class="btn btn-primary" href="{% url 'profile' %}">Thông tin</a></li>
+                <li class="d-grid"> <a  class="btn" href="{% url 'address' %}">Địa chỉ</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-8 offset-sm-1">
+            <div class="row">
+                {% for ad in add  %}
+                    <div class="col-sm-6">
+                        <div class="card m-2">
+                            <div class="card-body">
+                                <h3> Địa chỉ {{forloop.counter}}</h3>
+                                <p> Họ tên: {{ad.khTen}}</p>
+                                <p> Địa chỉ: {{ad.khDiachi}}</p>
+                                <p> Thành phố: {{ad.khThanhpho}}</p>
+                                <p> Số điện thoại: {{ad.khPhone}}</p>
+                                <p class="text-center"> <a href="{% url 'updateAddress' pk=ad.id %}" type="button" 
+                                    class="btn btn-success"> Cập nhật</a> </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock main-content %} 

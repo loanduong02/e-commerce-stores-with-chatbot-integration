@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Add any necessary stylesheets and scripts here -->
+</head>
+<body>
+    <div class="container">
+        <!-- Your HTML code here -->
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="user_input" placeholder="Write a message...">
+            <button type="submit" class="chatbox__send--footer send__button">Send</button>
+        </form>
+        <div>
+            {% if response %}
+                <p>Chatbot Response: {{ response }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+{% block main-content %}
+<link rel="stylesheet" href="{%static 'store/css/blog_detail.css'%}">
+    <div class="blog-single gray-bg">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col-lg-8 m-15px-tb">
+                    <article class="article">
+                        <div class="article-title">
+                            <h2>{{ post.baivietTen }}</h2>
+                            <div class="media">
+                                <div class="media-body">
+                                    <label> {{post.bvTacgia}}</label>
+                                    <span>{{post.bvNgaytao}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            {{ post.bvNoidung | safe }}
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-4 m-15px-tb blog-aside">
+                   
+                  <!-- Category -->
+                <div class="widget widget-tags">
+                    <div class="widget-title">
+                        <h3>Danh mục bài viết</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="nav tag-cloud">
+                            {% for categories_blog in categories_blogs %}
+                              <a href=""> {{categories_blog.loaibaivietTen }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- End widget Tags -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock main-content %}

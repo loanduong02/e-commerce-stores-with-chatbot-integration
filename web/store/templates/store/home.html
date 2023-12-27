@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+
+
+{% block banner-slider %}
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'store/images/banner/banner1.jpg' %}" height="350" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'store/images/banner/banner4.jpeg' %}" height="350" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'store/images/banner/bn2.jpg' %}" height="350" class="d-block w-100" alt="...">
+      </div>
+    </div>
+  </div>
+{% endblock banner-slider %}
+
+
+{% block main-content %}
+<hr>
+<h3 style="text-align: center" >Tất cả sản phẩm</h3>
+
+<div class="row" style="width: 100%; margin:20px"> 
+
+  {% for product in all_products %}
+  <div  class="col-lg-3"> 
+
+    <div style="width: 91.5% " class="box" >
+      <img  style="height: 300px"   class="thumbnail" src="{{product.ImageURL}}">
+       <div class="box-element product">
+        <h6> {{ product.spTen }} </h6>
+        <hr>
+        <a class="btn btn-outline-success" href="{% url 'product_detail' product.lsp.dmsp.dmspDuongdan product.lsp.lspDuongdan product.spDuongdan %}">Xem</a>
+        <h5 style="display: inline-block; float: right;"> <strong> {{product.formatted_price}}VND </strong> </h5>
+
+        </div>
+      </div> 
+    </div>
+    {% endfor %}
+
+    </div>
+
+    <br> <br>
+{% endblock main-content %}

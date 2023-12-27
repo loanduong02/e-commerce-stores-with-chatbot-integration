@@ -1,0 +1,66 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+{% block main-content %}
+
+<div  style="margin-top:-20px" class="container">
+    {% if messages %}
+        {% for msg in messages  %}
+            <div class="alert alert-danger" role="alert">
+                {{msg}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <h4> Order Summary</h4>
+            <hr>
+            {% for item in cart_items %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5> Sản phẩm: {{item.product.spTen}}</h5>
+                        <p>Số lượng: {{item.quantity}}</p>
+                        <p class="fw-bold">Giá: {{item.product.formatted_price}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <h5 class="fw-bold"> Tổng tiền: {{formatted_amount}}</h5>
+        </div>
+        <div class="col-sm-4 offset-sm-1">
+            <h4> Chọn địa chỉ </h4>
+    
+            <form action="/paymentdone">
+                {% csrf_token %}
+                {% for ad in add %}
+                    <div  style="margin-top:10px" class="card">
+                        <div class="card-body">
+                            <h5>{{ad.khTen}}</h5>
+                            <p>Số điện thoại: {{ad.khPhone}}</p>
+                            <p>{{ad.khDiachi}} {{ad.khThanhpho}}</p>
+                        </div>
+                    </div>
+                    <div  class="form-check mt-2 mb-5">
+                        <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+                        <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+                            Địa chỉ:{{forloop.counter}}
+                        </label>
+                    </div>
+
+                {% endfor %}
+
+                <div style="margin-top:-45px" class="form-check mb-3">
+                    <label for="totamount" class="form-label fw-bold"> Tổng thanh toán</label>
+                    <input type="text" class="form-control" name="totamount" value="{{ formatted_totalamount }}" readonly>
+                </div> 
+
+                <button class="btn btn-warning mt-3 px-5 fw-bold" type="submit"> Đặt hàng</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock main-content %}

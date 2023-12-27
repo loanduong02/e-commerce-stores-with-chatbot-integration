@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    
+    <!-- css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'store/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{%static 'store/css/style.css'%}">
+    <link rel="stylesheet" href="{%static 'store/css/all.min.css'%}">
+    <link rel="stylesheet" href="{%static 'store/css/main.css'%}">
+
+    {% comment %} <link rel="stylesheet" href="{%static 'store/css/chat.css'%}"> {% endcomment %}
+    <link rel="stylesheet" href="{%static 'store/css/chat2.css'%}">
+
+    <title> Beauty Shop {% block title %}{% endblock title %} </title>
+    <style>
+      .chatbox {
+          position: fixed;
+          bottom: 0;
+          right: 40px; /* điều chỉnh vị trí nếu cần thiết */
+          width: 350px; /* điều chỉnh chiều rộng nếu cần thiết */
+          border-radius: 8px;
+          z-index: 999; /* đảm bảo chatbox luôn nằm trên cùng */
+      }
+    </style>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Ngăn chặn hiển thị thanh cuộn ngang khi không cần thiết */
+      }
+    
+      .container {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+    </style>
+
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'store/images/logo.jpg' %}" width="50" height="50" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'base' %}">Trang Chủ</a>
+            </li>
+           
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sản Phẩm
+              </a>
+              
+              <ul class="dropdown-menu">
+                {% for category in categories %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'category_detail' category.dmspDuongdan %}">{{ category.dmspTen }}</a>
+                </li>
+                {% endfor %}
+            </ul> 
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'about' %}">Giới Thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'blog' %}"> Bài viết</a>
+            </li>
+            {% comment %} <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'contact' %}">Liên Hệ</a>
+            </li> {% endcomment %}
+          </ul>
+
+          <form class="d-flex" role="search" action="/search">
+       
+            <input style=" width: 500px" class="form-control me-2" type="search" placeholder="Kem chống nắng, Son môi, Dầu gội, Sữa tắm..." name="search">
+            <button class="btn btn-outline-success text-white" type="submit">Search</button>
+          </form> 
+
+        </div>
+        <!-- profileDropdown -->
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+          <!-- Hide profileDropdown NO LOGIN-->
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle text-white" id="profileDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{request.user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="{% url 'profile' %}">Thông tin</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile' %}">Sản phẩm yêu thích</a></li>
+              <li><a class="dropdown-item" href="{% url "orders" %}">Đơn hàng</a></li>
+              <li><a class="dropdown-item" href="{% url "passwordchange" %}">Đổi mật khẩu</a></li>
+              <li><a class="dropdown-item" href="{% url "logout" %}">Thoát</a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link text-white" href="{% url "showcart" %}">
+              <span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}}{% endif %} </span>
+               Giỏ hàng
+              </a>
+          </li>
+          
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link text-white" href="{% url 'login' %}">Đăng nhập</a>
+          </li>
+          {% endif %}
+
+        </ul>
+
+      </div>
+    </nav>
+    {% block banner-slider %}{% endblock banner-slider %}
+
+    {% comment %} <a href="{% url 'chat' %}">Open Chat</a> {% endcomment %}
+
+    {% block main-content %}{% endblock main-content %}
+
+
+    <div class="container">
+      {% csrf_token %}
+        <div class="chatbox">
+            <div  class="chatbox__support">
+                <div class="chatbox__header">
+                    <div class="chatbox__image--header">
+                        <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                    </div>
+                    <div class="chatbox__content--header">
+                        <h4 class="chatbox__heading--header">Chat với chúng tôi</h4>
+                        <p class="chatbox__description--header">Xin chào tôi có thể giúp gì cho bạn?</p>
+                    </div>
+                </div>
+    
+                <div class="chatbox__messages">
+                    <div></div>
+                </div>
+    
+                <div class="chatbox__footer">
+                    <input type="text" placeholder="Write a message...">
+                    <button class="chatbox__send--footer send__button">Send</button>
+                </div>
+            </div>
+            
+            <div class="chatbox__button">
+                <button><img src="{% static 'store/images/chatbox-icon.svg'%}" /></button>
+            </div>
+        </div>
+    </div>
+    
+    {% comment %} <footer class=" container-fluid fixed-bottom bg-success text-white text-center p-2 mt-5">
+      copyright 2023
+    </footer>  {% endcomment %}
+    
+    <!-- js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+
+    <script src="{%static 'store/js/all.min.js'%}"></script>
+    <script src="{%static 'store/js/minus1.js'%}"></script>
+    <script src="{%static 'store/js/c.js'%}"></script>
+
+    <script src="{%static 'store/js/chat.js'%}"></script>
+
+  {% comment %} <script src="{%static 'store/js/myscript.js'%}"></script>  {% endcomment %}
+
+    <script src="{%static 'store/js/owl.carousel.min.js'%}"></script>
+  </body>
+</html>
